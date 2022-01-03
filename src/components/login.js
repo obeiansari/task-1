@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
-import kbc from '../assets/images/kbc.jpg'
+import kbc from '../assets/images/maldive.jpg'
+import swal from 'sweetalert2';
 const Login = () => {
-    const [name, setName] = useState(null);
+    const [name, setName] = useState('');
 
     useEffect(() => {
         console.log(name)
     },[name]);
+
+    const loginHandler = () => {
+        if (name === '') {
+            swal.fire({
+                icon                  : 'error',
+                titleText             : 'Error!',
+                text                  : "Please enter the name",
+                buttonsStyling        : false,
+                confirmButtonClass    : 'btn btn-brand',
+            });
+        }
+    }
 
     const questions = [
         {
@@ -62,7 +75,7 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <div className="banner" style={{ backgroundImage: `url(${ kbc })`, height: '100%' }}>
+            <div className="banner" style={{ backgroundImage: `url(${ kbc })`, backgroundAttachment: 'fixed', backgroundRepeat: 'no-repeat' }}>
                 <div className="container">
                     <div className="row blog">
                         <div className="col-md-4 offset-md-4">
@@ -75,7 +88,7 @@ const Login = () => {
                                                 <input className="form-control" id="username" placeholder="Enter Name" onChange={(event) => setName(event.target.value)}/>
                                             </div>
                                             <div className="mt-3">
-                                                <button type="submit" className="btn btn-primary btn-block" id="submit">Login</button>
+                                                <button type="button" className="btn btn-primary btn-block" id="submit" onClick={loginHandler}>Login</button>
                                             </div>
                                         </form>
                                     </div>
